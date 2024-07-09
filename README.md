@@ -2,8 +2,7 @@
 
 This will generate a very simple pdf based dynamically based on the content that you provide to it. Probably won't be a drag and drop for your project, but should be enough to make some basic invoices.
 
-Here is the link to the documentation:
-link
+Here is the link to the documentation: (user guide)[https://www.reportlab.com/docs/reportlab-userguide.pdf]
 
 ## Running the project
 ### Prelude Virtualenv
