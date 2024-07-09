@@ -1,20 +1,24 @@
-from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from reportlab.lib import colors
 
 
-def create_invoice(invoice_data):
-    file_name = "invoice.pdf"
-    document_title = "Invoice"
-    title = "Invoice"
+def create_invoice(invoice_data, file_name, title):
+    # Basic document setup
+    pdf = canvas.Canvas(file_name)
+    pdf.setTitle(title)
+
     sub_title = "Order #{}".format(invoice_data['order_id'])
     customer_name = invoice_data['customer_name']
     address = invoice_data['address']
     items = invoice_data['items']
-    total = sum(item['price'] * item['quantity'] for item in items)
 
-    pdf = canvas.Canvas(file_name, pagesize=letter)
-    pdf.setTitle(document_title)
+    # This is just a quick hack to one line the total
+    total = sum(item['price'] * item['quantity'] for item in items)
+    # What this line is doing is as follows:
+    # prices = []
+    # for item in items:
+    #     prices.append(item['price'] * item['quantity'])
+    # total = sum(prices)
 
     # Title
     pdf.setFont("Helvetica-Bold", 20)
@@ -43,7 +47,7 @@ def create_invoice(invoice_data):
         pdf.drawString(300, y, "${:.2f}".format(item['price']))
         pdf.drawString(400, y, "${:.2f}".format(
             item['price'] * item['quantity']))
-        y -= 20
+        y -= 20  # move down 20px
 
     # Total
     pdf.drawString(50, y, "Total:")
@@ -64,4 +68,4 @@ invoice_data = {
     ]
 }
 
-create_invoice(invoice_data)
+create_invoice(invoice_data, 'invoice.pdf', 'Invoice')
