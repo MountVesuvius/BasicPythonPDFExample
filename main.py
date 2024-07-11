@@ -20,6 +20,9 @@ def create_invoice(invoice_data, file_name, title):
     #     prices.append(item['price'] * item['quantity'])
     # total = sum(prices)
 
+    logo_path = "logo.png"
+    pdf.drawImage(logo_path, 50, 750, width=100, height=50)  # Adjust the position and size as needed
+
     # Title
     pdf.setFont("Helvetica-Bold", 20)
     pdf.drawCentredString(300, 750, title)
